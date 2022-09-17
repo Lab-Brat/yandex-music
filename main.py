@@ -18,11 +18,20 @@ class Music():
         return client
 
     def get_liked_songs(self):
-        likes = self.client.users_likes_tracks()[0].fetch_track()
-        print(likes.title)
-        print(likes.artists[0]['name'])
+        likes = self.client.users_likes_tracks()
+        tracks = []
+        for i, track in enumerate(likes):
+            print(f'track {i}, count: {(i+1) % 10}')
+            info = track.fetch_track()
+            tracks.append((info.title, info.artists[0]['name']))
+            if (i+1) % 10 == 0:
+                print('Read 10 tracks')
+                break
+        
+        return tracks
 
 
 if __name__ == '__main__':
     ym = Music()
-    ym.get_liked_songs()
+    likes = ym.get_liked_songs()
+    print(likes)

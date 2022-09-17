@@ -24,7 +24,7 @@ class Music():
             info = track.fetch_track()
             tracks.append((info.title, info.artists[0]['name']))
             if (i+1) % 20 == 0:
-                print('Read 20 tracks')
+                print(f'Read {i+1} tracks')
 
         if write == True:
             self.write(tracks)

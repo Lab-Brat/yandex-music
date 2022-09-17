@@ -11,16 +11,10 @@ class Music():
         with open(token_file, 'r') as f:
             return f.readlines()[0]
 
-    def blockPrint(self):
-        sys.stdout = open(os.devnull, 'w')
-
-    def enablePrint(self):
-        sys.stdout = sys.__stdout__
-
     def authenticate(self):
-        self.blockPrint()
+        sys.stdout = open(os.devnull, 'w')
         client = Client(self.token).init()
-        self.enablePrint()
+        sys.stdout = sys.__stdout__
         return client
 
     def get_liked_songs(self):
